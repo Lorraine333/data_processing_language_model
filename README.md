@@ -1,4 +1,4 @@
-# todo:
+# Todo:
 * data_processing.py: update hypernym index according to bert word tokenization.
 * mask_processing.py: generate mask mark list.
 * mask_token_processing.py: using the generate marked list, generated masked tokens.
