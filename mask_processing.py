@@ -118,7 +118,7 @@ def main():
         assert len(token_list) == 881918
     
     elif args.data_file == 'train':
-        assert len(token_list) == 6664307
+        assert len(token_list) == 6664040
     else:
         raise ValueError('Invalid data_file input, choose from dev, test or train')
 
