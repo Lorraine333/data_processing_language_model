@@ -88,68 +88,68 @@ def get_marked_token_list(token_list, mark_list, normal_word2idx, hyper_word2idx
     return marked_token_idx_list
 
 def main():
-	# train_bert_tokens, train_bert_idx, train_marked_list = read_required_file('train')
-	# get_max_sub(list(train_marked_list))
-	dev_bert_tokens, dev_bert_idx, dev_marked_list = read_required_file('dev')
-	test_bert_tokens, test_bert_idx, test_marked_list = read_required_file('test')
-	
-	bert_token2idx = {}
-	# bert_token2idx = get_bert_vocab(bert_token2idx, train_bert_tokens, train_bert_idx)
-	bert_token2idx = get_bert_vocab(bert_token2idx, dev_bert_tokens, dev_bert_idx)
-	bert_token2idx = get_bert_vocab(bert_token2idx, test_bert_tokens, test_bert_idx)
+    train_bert_tokens, train_bert_idx, train_marked_list = read_required_file('train')
+    get_max_sub(list(train_marked_list))
+    dev_bert_tokens, dev_bert_idx, dev_marked_list = read_required_file('dev')
+    test_bert_tokens, test_bert_idx, test_marked_list = read_required_file('test')
 
-	normal_word, hyper_word, sub_word = [], [], []
-	# normal_word, hyper_word, sub_word = combine_data_tokens(normal_word,
-		# hyper_word, sub_word, train_bert_tokens, train_marked_list)
-	normal_word, hyper_word, sub_word = combine_data_tokens(
-		normal_word, hyper_word, sub_word, dev_bert_tokens, dev_marked_list)
-	normal_word, hyper_word, sub_word = combine_data_tokens(
-		normal_word, hyper_word, sub_word, test_bert_tokens, test_marked_list)
+    bert_token2idx = {}
+    bert_token2idx = get_bert_vocab(bert_token2idx, train_bert_tokens, train_bert_idx)
+    bert_token2idx = get_bert_vocab(bert_token2idx, dev_bert_tokens, dev_bert_idx)
+    bert_token2idx = get_bert_vocab(bert_token2idx, test_bert_tokens, test_bert_idx)
 
-	NORMAL_WORD_NUM=len(normal_word)
-	HYPER_WORD_NUM=len(normal_word)+len(hyper_word)
-	SUB_WORD_NUM=len(normal_word)+len(hyper_word)+len(sub_word)
-	normal_word2idx = {normal_word[i]:i for i in range(len(normal_word))}
-	hyper_word2idx = {hyper_word[i]:NORMAL_WORD_NUM+i for i  in range(len(hyper_word))}
-	sub_word2idx = {sub_word[i]:HYPER_WORD_NUM+i for i in range(len(sub_word))}
-	assert len(normal_word2idx)+len(hyper_word2idx)+len(sub_word2idx) == SUB_WORD_NUM
-	
+    normal_word, hyper_word, sub_word = [], [], []
+    normal_word, hyper_word, sub_word = combine_data_tokens(normal_word,
+        hyper_word, sub_word, train_bert_tokens, train_marked_list)
+    normal_word, hyper_word, sub_word = combine_data_tokens(
+        normal_word, hyper_word, sub_word, dev_bert_tokens, dev_marked_list)
+    normal_word, hyper_word, sub_word = combine_data_tokens(
+        normal_word, hyper_word, sub_word, test_bert_tokens, test_marked_list)
 
-	myidx2bertidx = {}
-	for word in normal_word2idx:
-	    if normal_word2idx[word] not in myidx2bertidx:
-	        myidx2bertidx[normal_word2idx[word]] = bert_token2idx[word]
-	for word in hyper_word2idx:
-	    if hyper_word2idx[word] not in myidx2bertidx:
-	        myidx2bertidx[hyper_word2idx[word]] = bert_token2idx[word]
-	for word in sub_word2idx:
-	    if sub_word2idx[word] not in myidx2bertidx:
-	        myidx2bertidx[sub_word2idx[word]] = bert_token2idx[word]
-	assert len(myidx2bertidx) == SUB_WORD_NUM
+    NORMAL_WORD_NUM=len(normal_word)
+    HYPER_WORD_NUM=len(normal_word)+len(hyper_word)
+    SUB_WORD_NUM=len(normal_word)+len(hyper_word)+len(sub_word)
+    normal_word2idx = {normal_word[i]:i for i in range(len(normal_word))}
+    hyper_word2idx = {hyper_word[i]:NORMAL_WORD_NUM+i for i  in range(len(hyper_word))}
+    sub_word2idx = {sub_word[i]:HYPER_WORD_NUM+i for i in range(len(sub_word))}
+    assert len(normal_word2idx)+len(hyper_word2idx)+len(sub_word2idx) == SUB_WORD_NUM
 
-	# train_marked_token_idx_list = get_marked_token_list(train_bert_tokens, train_marked_list,
- #                                                    normal_word2idx, hyper_word2idx, sub_word2idx)
-	dev_marked_token_idx_list = get_marked_token_list(dev_bert_tokens, dev_marked_list,
-	                                                  normal_word2idx, hyper_word2idx, sub_word2idx)
-	test_marked_token_idx_list = get_marked_token_list(test_bert_tokens, test_marked_list, 
-	                                                  normal_word2idx, hyper_word2idx, sub_word2idx)
 
-	# assert len(train_marked_list) == len(train_bert_idx)
-	assert len(dev_marked_list) == len(dev_bert_idx)
-	assert len(test_marked_list) == len(test_bert_idx)
+    myidx2bertidx = {}
+    for word in normal_word2idx:
+        if normal_word2idx[word] not in myidx2bertidx:
+            myidx2bertidx[normal_word2idx[word]] = bert_token2idx[word]
+    for word in hyper_word2idx:
+        if hyper_word2idx[word] not in myidx2bertidx:
+            myidx2bertidx[hyper_word2idx[word]] = bert_token2idx[word]
+    for word in sub_word2idx:
+        if sub_word2idx[word] not in myidx2bertidx:
+            myidx2bertidx[sub_word2idx[word]] = bert_token2idx[word]
+    assert len(myidx2bertidx) == SUB_WORD_NUM
 
-	# with open('./WSD_Training_Corpora/bert_train/train.pkl', 'wb') as f:
-	    # pickle.dump(np.asarray(train_marked_token_idx_list), f)
-	with open('../semcor/train_bert/dev.pkl', 'wb') as f:
-	    pickle.dump(np.asarray(dev_marked_token_idx_list), f)
-	with open('../semcor/train_bert/test.pkl', 'wb') as f:
-	    pickle.dump(np.asarray(test_marked_token_idx_list), f)
+    train_marked_token_idx_list = get_marked_token_list(train_bert_tokens, train_marked_list,
+                                                    normal_word2idx, hyper_word2idx, sub_word2idx)
+    dev_marked_token_idx_list = get_marked_token_list(dev_bert_tokens, dev_marked_list,
+                                                      normal_word2idx, hyper_word2idx, sub_word2idx)
+    test_marked_token_idx_list = get_marked_token_list(test_bert_tokens, test_marked_list,
+                                                      normal_word2idx, hyper_word2idx, sub_word2idx)
 
-	idx_mapping_list = [0]*len(myidx2bertidx)
-	for k in myidx2bertidx:
-	    idx_mapping_list[k] = myidx2bertidx[k]
-	with open('../semcor/train_bert/myidx2bertidx.pkl', 'wb') as f:
-	    pickle.dump(np.asarray(idx_mapping_list), f)
+    assert len(train_marked_list) == len(train_bert_idx)
+    assert len(dev_marked_list) == len(dev_bert_idx)
+    assert len(test_marked_list) == len(test_bert_idx)
+
+    with open('../semcor/train_bert/train.pkl', 'wb') as f:
+        pickle.dump(np.asarray(train_marked_token_idx_list), f)
+    with open('../semcor/train_bert/dev.pkl', 'wb') as f:
+        pickle.dump(np.asarray(dev_marked_token_idx_list), f)
+    with open('../semcor/train_bert/test.pkl', 'wb') as f:
+        pickle.dump(np.asarray(test_marked_token_idx_list), f)
+
+    idx_mapping_list = [0]*len(myidx2bertidx)
+    for k in myidx2bertidx:
+        idx_mapping_list[k] = myidx2bertidx[k]
+    with open('../semcor/train_bert/myidx2bertidx.pkl', 'wb') as f:
+        pickle.dump(np.asarray(idx_mapping_list), f)
 
 
 

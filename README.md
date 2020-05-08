@@ -4,6 +4,6 @@
 * mask_token_processing.py: using the generate marked list, generated masked tokens.
 
 1) ran hyper_processing finish for dev/test/train. 3 job
-2) running masked tokens for dev/test/train. 3 jobs
-3) will run re-generate masked tokens. 1 combination job
+2) ran masked tokens for dev/test/train. 3 jobs
+3) ran run re-generate masked tokens. 1 combination job
 
