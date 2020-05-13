@@ -124,6 +124,8 @@ def main():
 
     # read file
     updated_hyper_token_idx_list = read_file('../semcor/updated_'+args.data_file+'_idx.pkl')
+    updated_level_list = read_file('../semcor/updated_'+args.data_file+'_level_idx.pkl')
+    updated_hyperset_list = read_file('../semcor/updated_'+args.data_file+'_hyperset_idx.pkl')
     word_tokens = read_file('../semcor/'+bert_filename+'_word_tokens.pkl')
     bpe_tokens = read_file('../semcor/'+bert_filename+'_bpe_tokens.pkl')
     bpe_idx = read_file('../semcor/'+bert_filename+'_bpe_idx.pkl')
@@ -160,6 +162,40 @@ def main():
     assert len(marked_list) == len(bpe_tokens)
     with open('../semcor/marked_'+args.data_file+'_idx.pkl', 'wb') as f:
         pickle.dump(np.asarray(marked_list), f)
+
+    # update level list
+    marked_level_list = []
+    offset = 0
+    for original_idx in tqdm(range(len(updated_level_list))):
+        bpe_idx = original_idx+offset
+        if original_idx in updated_hyper_token_idx_list:
+            marked_level_list.append(updated_level_list[original_idx])
+        else:
+            marked_level_list.append(updated_level_list[original_idx])
+        while bpe_idx+1 < len(bpe_tokens) and str(bpe_tokens[bpe_idx+1]).startswith('#'):
+            bpe_idx+=1
+            offset+=1
+            marked_level_list.append(updated_level_list[original_idx])
+
+    # update hyperset list
+    marked_hyperset_list = []
+    offset = 0
+    for original_idx in tqdm(range(len(updated_hyperset_list))):
+        bpe_idx = original_idx+offset
+        if original_idx in updated_hyper_token_idx_list:
+            marked_hyperset_list.append(updated_hyperset_list[original_idx])
+        else:
+            marked_hyperset_list.append(updated_hyperset_list[original_idx])
+        while bpe_idx+1 < len(bpe_tokens) and str(bpe_tokens[bpe_idx+1]).startswith('#'):
+            bpe_idx+=1
+            offset+=1
+            marked_hyperset_list.append(updated_hyperset_list[original_idx])
+
+    assert len(marked_list) == len(marked_level_list) == len(marked_hyperset_list)
+    with open('../semcor/marked_bpe'+args.data_file+'_level.pkl', 'wb') as f:
+        pickle.dump(np.asarray(marked_level_list), f)
+    with open('../semcor/marked_bpe'+args.data_file+'_hyperset.pkl', 'wb') as f:
+        pickle.dump(np.asarray(marked_hyperset_list), f)
 
 
 
