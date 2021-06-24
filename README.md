@@ -78,6 +78,7 @@ The resulting pickle include: the index of the hypernym words in the list, the l
 =======================================seperator=======================================
 
 `mask_token_processing.py`
+
 Combine al index from train/dev/test together, and re-idx the whole file.
 Input files are taken from the previously output files. 
 
