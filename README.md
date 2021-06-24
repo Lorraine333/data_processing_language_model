@@ -32,11 +32,13 @@ The resulting pickle include: the index of the hypernym words in the list, the l
 `gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/SemCor/semcor/.*.xml`
 `gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_word_tokens.pkl`
 
-**Output file location**: 
-gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_idx.pkl
-gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_level_idx.pkl
-gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_hyperset_idx.pkl
+**Output file location**:
 
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_idx.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_level_idx.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_hyperset_idx.pkl`
+
+====================================================seperator====================================================
 `mask_processing.py`
 **Input**: 
 - SemCor xml file (train/dev/test)
