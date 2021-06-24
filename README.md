@@ -41,6 +41,7 @@ The resulting pickle include: the index of the hypernym words in the list, the l
 =======================================seperator=======================================
 
 `mask_processing.py`
+
 **Input**: 
 - SemCor xml file (train/dev/test)
 - Updated hypernym token idx list (output from data_processing.py)
@@ -49,32 +50,37 @@ The resulting pickle include: the index of the hypernym words in the list, the l
 - Augumented word tokens seperated by Bert Tokenizer(train/dev/test)
 - Augumented bpe tokens seperated by Bert Tokenizer(train/dev/test)
 - Augumented bpe idx seperated by Bert Tokenizer(train/dev/test)
+
 **Output**:
 - Marked bpe idx: with 0(normal), 1(hypernym), 2(subword)
+
 **Function**:
 1. Takes SemCor xml file, bert tokenized results, updated word tokenization results.
 2. Compare the updated word tokenization with the bpe tokenization, mark each bpe token with the special annotation. 0 for normal words, 1 for hypernym and 2 for subwords.
 3. Write the marked list, and the bpe level/hyperset idx. 
 
 **Input file location**: 
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/SemCor/semcor.*.xml
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_word_tokens.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_bpe_tokens.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_bpe_idx.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_idx.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_level_idx.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_hyperset_idx.pkl
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/SemCor/semcor.*.xml`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_word_tokens.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_bpe_tokens.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_bpe_idx.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_idx.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_level_idx.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_hyperset_idx.pkl`
 
 **Output file location**: 
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/marked_*_idx.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/marked_bpe_*_level.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/marked_bpe_*_hyperset.pkl
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/marked_*_idx.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/marked_bpe_*_level.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/marked_bpe_*_hyperset.pkl`
+
+=======================================seperator=======================================
 
 `mask_token_processing.py`
 Combine al index from train/dev/test together, and re-idx the whole file.
 Input files are taken from the previously output files. 
 
 **Output file location:**
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/train_bert/train_level_hyperset.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/train_bert/dev_level_hyperset.pkl
-- gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/train_bert/test_level_hyperset.pkl
+
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/train_bert/train_level_hyperset.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/train_bert/dev_level_hyperset.pkl`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/train_bert/test_level_hyperset.pkl`
