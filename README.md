@@ -13,11 +13,14 @@ This repo is used for pre-processing hypernym based language model learning. It 
 
 # Each file readme.
 `data_processing.py`
+
 **Input**: 
 - SemCor xml file (train/dev/test)
 - Augumented word tokens seperated by Bert Tokenizer(train/dev/test)
+
 **Output**:
 - updated hyper_idx/level/hyperset pkl file.
+
 **Function**:
 1. Takes SemCor xml file, augument the sentence using Wordnet synsets, repeating each sentence to by replacing the hyponym to its hypernym.
 2. Compare the resulting repeated sentence to the Bert tokenized version. Since Bert use its own word tokenizer, the tokenization is different. 
