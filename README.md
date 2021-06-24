@@ -27,9 +27,10 @@ This repo is used for pre-processing hypernym based language model learning. It 
 3. Sync both tokenizations, save the updated tokenization to the new pickle file. 
 The resulting pickle include: the index of the hypernym words in the list, the level information of the hypernym words in the list, the idx of the hypernym set information in the list. 
 
-**Input file location**: 
-gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/SemCor/semcor.*.xml
-gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_word_tokens.pkl
+**Input file location**:
+
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/SemCor/semcor/.\*.xml`
+`gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/aug_*_word_tokens.pkl`
 
 **Output file location**: 
 gypsum:/mnt/nfs/work1/mccallum/xiangl/concept_lm/semcor/updated_*_idx.pkl
